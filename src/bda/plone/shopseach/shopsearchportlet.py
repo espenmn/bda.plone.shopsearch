@@ -6,7 +6,7 @@ from zope.formlib import form
 from zope.interface import implements
 from zope import schema
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from plone.memoize.instance import memoize
+#from plone.memoize.instance import memoize
 
 from Products.CMFPlone import PloneMessageFactory as _
 from plone.app.portlets.portlets import base
@@ -31,11 +31,11 @@ class IShopSearchPortlet(IPortletDataProvider):
             required = False)
 
 
-    b_end = schema.Bool(
-                         title = _(u"How many to show"),
-                         description = _(u"How many to show in each batch"),
-                         default = 30,
-                         required = True)
+    b_end = schema.Int(
+            title = _(u"How many to show"),
+            description = _(u"How many to show in each batch"),
+            default = 30,
+            required = True)
 
 
 class Assignment(base.Assignment):
@@ -51,7 +51,7 @@ class Assignment(base.Assignment):
 
 class Renderer(base.Renderer):
 
-    render = ViewPageTemplateFile('shopsearch.pt')
+    render = ViewPageTemplateFile('shopsearchportlet.pt')
 
     def __init__(self, context, request, view, manager, data):
         base.Renderer.__init__(self, context, request, view, manager, data)
@@ -61,6 +61,12 @@ class Renderer(base.Renderer):
 
     def enable_livesearch(self):
         return self.data.enableLivesearch
+
+    def showImages(self):
+        return self.data.showImages
+
+    def b_end(self):
+        return self.data.b_end
 
     def search_action(self):
         return '%s/@@search' % self.navigation_root_url
