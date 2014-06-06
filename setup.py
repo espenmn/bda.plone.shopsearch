@@ -33,7 +33,6 @@ setup(
     install_requires=[
         'setuptools',
         'Plone',
-        'plone.app.search',
     ],
     extras_require={
         'test': [
