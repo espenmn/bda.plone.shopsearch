@@ -11,7 +11,7 @@ longdesc += open(os.path.join(os.path.dirname(__file__), 'LICENSE.rst')).read()
 
 
 setup(
-    name='bda.plone.shop',
+    name='bda.plone.shopsearch',
     version=version,
     description=shortdesc,
     long_description=longdesc,
