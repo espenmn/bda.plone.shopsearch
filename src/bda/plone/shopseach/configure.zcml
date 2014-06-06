@@ -1,13 +1,12 @@
 <configure xmlns="http://namespaces.zope.org/zope"
-           xmlns:five="http://namespaces.zope.org/five"
            xmlns:i18n="http://namespaces.zope.org/i18n"
            xmlns:zcml="http://namespaces.zope.org/zcml"
+           xmlns:plone="http://namespaces.plone.org/plone"
            xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
            i18n_domain="bda.plone.shopsearch">
 
   <i18n:registerTranslations directory="locales"/>  
-  <include package=".browser"/>
-  
+   
   <genericsetup:registerProfile
     name="default"
     title="bda.plone.shopsearch"
@@ -15,5 +14,23 @@
     description="bda.plone.shopsearch"
     provides="Products.GenericSetup.interfaces.EXTENSION"/>
 
+
+   <!-- Register the portlet -->
+
+   <!-- If the portlet has no configurable parameters, you can remove
+          the EditForm declaration in placeholderportlet.py and delete
+          the 'editview' attribute from this statement.
+    	-->
+ 
+   <plone:portlet
+         name="bda.plone.shopsearch.ShopSearchPortlet"
+         interface=".interfaces.IShopSearchPortlet"
+         assignment=".browser.shopsearchportlet.Assignment"
+         view_permission="zope2.View"
+         edit_permission="cmf.ManagePortal"
+         renderer=".browser.shopsearchportlet.Renderer"
+         addview=".browser.shopsearchportlet.AddForm"
+         editview=".browser.shopsearchportlet.EditForm"
+         />
 
 </configure>

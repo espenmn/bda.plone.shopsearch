@@ -8,7 +8,7 @@ from zope import schema
 
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
-from plone.app.portlets import PloneMessageFactory as _
+from Products.CMFPlone import PloneMessageFactory as _
 from plone.app.portlets.portlets import base
 
 
@@ -67,7 +67,7 @@ class Renderer(base.Renderer):
 
 
 class AddForm(base.AddForm):
-    form_fields = form.Fields(ISearchPortlet)
+    form_fields = form.Fields(IShopSearchPortlet)
     label = _(u"Add Shopsearch Portlet")
     description = _(u"A search box for bda.plone.shop.")
 
@@ -76,6 +76,6 @@ class AddForm(base.AddForm):
 
 
 class EditForm(base.EditForm):
-    form_fields = form.Fields(ISearchPortlet)
+    form_fields = form.Fields(IShopSearchPortlet)
     label = _(u"Edit Shopsearch Portlet")
     description = _(u"A search box for bda.plone.shop.")
