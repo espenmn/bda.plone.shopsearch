@@ -2,6 +2,7 @@
            xmlns:i18n="http://namespaces.zope.org/i18n"
            xmlns:zcml="http://namespaces.zope.org/zcml"
            xmlns:plone="http://namespaces.plone.org/plone"
+           xmlns:browser="http://namespaces.zope.org/browser"
            xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
            i18n_domain="bda.plone.shopsearch">
 
@@ -32,5 +33,14 @@
          addview=".shopsearchportlet.AddForm"
          editview=".shopsearchportlet.EditForm"
          />
+
+
+    <browser:page
+        name="shopsearch"
+        class="plone.app.seach.browser.Search"
+        permission="zope2.View"
+        for="*"
+        template="shopsearch.pt"
+        />
 
 </configure>

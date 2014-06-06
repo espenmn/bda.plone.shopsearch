@@ -71,7 +71,7 @@ class Renderer(base.Renderer):
         return self.data.end
 
     def search_action(self):
-        return '%s/@@search' % self.navigation_root_url
+        return '%s/@@shopsearch' % self.navigation_root_url
 
 
 class AddForm(base.AddForm):
