@@ -25,12 +25,12 @@
    <plone:portlet
          name="bda.plone.shopsearch.ShopSearchPortlet"
          interface=".interfaces.IShopSearchPortlet"
-         assignment=".browser.shopsearchportlet.Assignment"
+         assignment=".shopsearchportlet.Assignment"
          view_permission="zope2.View"
          edit_permission="cmf.ManagePortal"
-         renderer=".browser.shopsearchportlet.Renderer"
-         addview=".browser.shopsearchportlet.AddForm"
-         editview=".browser.shopsearchportlet.EditForm"
+         renderer=".shopsearchportlet.Renderer"
+         addview=".shopsearchportlet.AddForm"
+         editview=".shopsearchportlet.EditForm"
          />
 
 </configure>

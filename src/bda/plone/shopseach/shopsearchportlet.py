@@ -1,18 +1,18 @@
-#from plone.portlets.interfaces import IPortletDataProvider
-from plone.app.portlets.portlets.search import ISearchPortlet
+from plone.portlets.interfaces import IPortletDataProvider
+#from plone.app.portlets.portlets.search import ISearchPortlet
 
 from zope.component import getMultiAdapter
 from zope.formlib import form
 from zope.interface import implements
 from zope import schema
-
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from plone.memoize.instance import memoize
 
 from Products.CMFPlone import PloneMessageFactory as _
 from plone.app.portlets.portlets import base
 
 
-class IShopSearchPortlet(ISearchPortlet):
+class IShopSearchPortlet(IPortletDataProvider):
     """ A portlet displaying a (live) search box for bda.plone.shop.
     """
 
