@@ -92,7 +92,7 @@
                  tal:define="b_start python:0;
                  			 b_end python:0;
                              b_start request/b_start | b_start;
-                             b_end request/b_end | b_end;
+                             b_end request/end | b_end;
                              batch python: view.results(b_start=b_start, b_end=b_end);
                              normalizeString nocall:context/@@plone/normalizeString;">
 

@@ -1,5 +1,5 @@
 from plone.portlets.interfaces import IPortletDataProvider
-#from plone.app.portlets.portlets.search import ISearchPortlet
+from plone.app.portlets.portlets.search import ISearchPortlet
 
 from zope.component import getMultiAdapter
 from zope.formlib import form
@@ -12,7 +12,7 @@ from Products.CMFPlone import PloneMessageFactory as _
 from plone.app.portlets.portlets import base
 
 
-class IShopSearchPortlet(IPortletDataProvider):
+class IShopSearchPortlet(IPortletDataProvider, ISearchPortlet):
     """ A portlet displaying a (live) search box for bda.plone.shop.
     """
 
@@ -31,7 +31,7 @@ class IShopSearchPortlet(IPortletDataProvider):
             required = False)
 
 
-    b_end = schema.Int(
+    end = schema.Int(
             title = _(u"How many to show"),
             description = _(u"How many to show in each batch"),
             default = 30,
@@ -41,8 +41,10 @@ class IShopSearchPortlet(IPortletDataProvider):
 class Assignment(base.Assignment):
     implements(IShopSearchPortlet)
 
-    def __init__(self, enableLivesearch=True):
+    def __init__(self, enableLivesearch=True, end=30, showImages=True):
         self.enableLivesearch=enableLivesearch
+        self.end=end
+        self.showImages=showImages
 
     @property
     def title(self):
@@ -65,8 +67,8 @@ class Renderer(base.Renderer):
     def showImages(self):
         return self.data.showImages
 
-    def b_end(self):
-        return self.data.b_end
+    def end(self):
+        return self.data.end
 
     def search_action(self):
         return '%s/@@search' % self.navigation_root_url
