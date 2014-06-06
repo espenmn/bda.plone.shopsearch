@@ -37,7 +37,7 @@
 
     <browser:page
         name="shopsearch"
-        class="plone.app.seach.browser.Search"
+        class="plone.app.search.Search"
         permission="zope2.View"
         for="*"
         template="shopsearch.pt"
