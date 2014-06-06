@@ -2,4 +2,4 @@
 *.pyo
 *.mo
 /dist/
-/src/bda.plone.discount.egg-info/
+/src/bda.plone.shopsearch.egg-info/
