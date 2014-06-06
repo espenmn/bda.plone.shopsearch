@@ -93,7 +93,7 @@
                  			 b_end python:0;
                              b_start request/b_start | b_start;
                              b_end request/end | b_end;
-                             batch python: view.results(b_start=b_start, b_end=b_end);
+                             batch python: view.results(b_start=b_start);
                              normalizeString nocall:context/@@plone/normalizeString;">
 
                 <div id="search-results-bar">
