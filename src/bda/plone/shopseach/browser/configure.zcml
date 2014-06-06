@@ -1,0 +1,24 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="bda.plone.shopsearch">
+  
+     <!-- Register the portlet -->
+
+     <!-- If the portlet has no configurable parameters, you can remove
+          the EditForm declaration in placeholderportlet.py and delete
+          the 'editview' attribute from this statement.
+       -->
+ 
+     <plone:portlet
+         name="bda.plone.shopsearch.ShopSearchPortlet"
+         interface=".shopsearchportlet.IShopSearchPortlet"
+         assignment=".shopsearchportlet.Assignment"
+         view_permission="zope2.View"
+         renderer=".shopsearchportlet.Renderer"
+         addview=".shopsearchportlet.AddForm"
+         editview=".shopsearchportlet.EditForm"
+         />
+
+</configure>

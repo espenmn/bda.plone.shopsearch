@@ -1,0 +1,13 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+           i18n_domain="bda.plone.shopsearch">
+
+ 
+  <genericsetup:registerProfile
+    name="default"
+    title="bda.plone.shopsearch"
+    directory="profiles/default"
+    description="bda.plone.shopsearch"
+    provides="Products.GenericSetup.interfaces.EXTENSION"/>
+
+</configure>
