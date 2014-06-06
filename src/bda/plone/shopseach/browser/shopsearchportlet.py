@@ -1,5 +1,5 @@
 #from plone.portlets.interfaces import IPortletDataProvider
-from plone.app.portlets.portlets import ISearchPortlet
+from plone.app.portlets.portlets.search import ISearchPortlet
 
 from zope.component import getMultiAdapter
 from zope.formlib import form
@@ -8,8 +8,8 @@ from zope import schema
 
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
-#from plone.app.portlets import PloneMessageFactory as _
-#from plone.app.portlets.portlets import base
+from plone.app.portlets import PloneMessageFactory as _
+from plone.app.portlets.portlets import base
 
 
 class IShopSearchPortlet(ISearchPortlet):
