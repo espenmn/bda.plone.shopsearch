@@ -33,6 +33,7 @@ setup(
     install_requires=[
         'setuptools',
         'Plone',
+        'z3c.jbot',
     ],
     extras_require={
         'test': [

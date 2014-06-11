@@ -89,7 +89,7 @@
             <div class="visualClear"><!-- --></div>
             <div id="search-results-wrapper"
                  class="cell width-full position-0"
-                 tal:define="b_start python:0; b_size python: 100; b_size python: 100;
+                 tal:define="b_start python:0; b_size python: 10; b_size python: 10;
                              b_start request/b_start | b_start;
                              b_end request/b_size | b_size;
                              batch python: view.results(b_start=b_start, b_size=b_size);
@@ -279,9 +279,9 @@
                                       <a href="#" tal:define="item_url item/getURL;
                                               		           item_type item/PortalType"
                                                   tal:attributes="href python:item_type in use_view_action and (item_url + '/view') or item_url;"
-                                          			tal:condition="item/image" >
+                                          			tal:condition="exists: item/image" >
   											<img tal:define="itemobj item/getObject; scale itemobj/@@images"
-       						 					  tal:replace="structure python: scale.scale('image', width=200, height=200).tag(css_class='searchImage')" />
+       						 					  tal:replace="structure python: scale.scale('image', 'thumb').tag(css_class='searchImage')" />
 									  </a>
 										
                                       <a href="#" class="seachtitle"
@@ -383,6 +383,35 @@
                                       <div tal:content="item/CroppedDescription">
                                         Cropped description
                                       </div>
+                                      
+                                      
+                                      
+                                      
+                                    <div class="producttext" tal:condition="python:item.portal_type == 'mything'">
+									 <p  class="itemprice" tal:define="item_sum python:float(item.item_net) * (100+int(item.item_vat))/100" 
+										tal:content="item_sum"> 
+									 </p>
+
+
+									<span class="cart_item_uid"
+										  style="display: none;"
+										  tal:content="item/UID">12345678</span>
+
+									<input type="text"
+										size="2"
+										value="1"
+										class="cart_item_count" />
+									<a href="" class="button"
+									 tal:attributes="href item/getURL"
+									 i18n:translate="read_more">Read more
+									</a>  
+									<a href="" class="add_cart_item buyable_add_to_cart"
+									 i18n:translate="buy">buy
+									</a>  
+ 
+								 <div class="visualClear" ><!-- --></div>
+							 	</div>
+                                      
 
                                       
 
