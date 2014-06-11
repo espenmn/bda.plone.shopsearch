@@ -28,7 +28,7 @@
   <div id="content-core" metal:fill-slot="main">
 
     <form name="searchform"
-          action="@@shopsearch"
+          action="@@search"
           class="searchPage enableAutoFocus"
           tal:define="portal context/@@plone_portal_state/portal;
                       first_call not:request/advanced_search|nothing;
@@ -89,11 +89,10 @@
             <div class="visualClear"><!-- --></div>
             <div id="search-results-wrapper"
                  class="cell width-full position-0"
-                 tal:define="b_start python:0;
-                 			 b_end python:0;
+                 tal:define="b_start python:0; b_size python: 100; b_size python: 100;
                              b_start request/b_start | b_start;
-                             b_end request/end | b_end;
-                             batch python: view.results(b_start=b_start);
+                             b_end request/b_size | b_size;
+                             batch python: view.results(b_start=b_start, b_size=b_size);
                              normalizeString nocall:context/@@plone/normalizeString;">
 
                 <div id="search-results-bar">
@@ -277,13 +276,22 @@
                           <dl class="searchResults">
                               <tal:results repeat="item batch">
                                     <dt tal:attributes="class item/ContentTypeClass">
-                                      <img tal:replace="structure item/getIcon" />
-                                      <a href="#"
+                                      <a href="#" tal:define="item_url item/getURL;
+                                              		           item_type item/PortalType"
+                                                  tal:attributes="href python:item_type in use_view_action and (item_url + '/view') or item_url;"
+                                          			tal:condition="item/image" >
+  											<img tal:define="itemobj item/getObject; scale itemobj/@@images"
+       						 					  tal:replace="structure python: scale.scale('image', width=200, height=200).tag(css_class='searchImage')" />
+									  </a>
+										
+                                      <a href="#" class="seachtitle"
                                          tal:define="item_url item/getURL;
                                                      item_type item/PortalType"
-                                         tal:attributes="href python:item_type in use_view_action and (item_url + '/view') or item_url;
-                                                         class string:state-${item/review_state}"
-                                         tal:content="python:item.getDataOrigin().pretty_title_or_id()" />
+                                         tal:attributes="href python:item_type in use_view_action and (item_url + '/view') or item_url"
+                                         tal:content="python:item.getDataOrigin().pretty_title_or_id()" 
+                                         />
+      									
+                                         
                                     </dt>
                                     <dd>
                                       <span class="discreet" i18n:domain="plone"
@@ -302,7 +310,22 @@
                                               </a>
                                             </tal:block>
                                         </span>
-
+                                        
+                                        <span tal:define="categories item/Subject|nothing"
+                                              tal:condition="categories">
+                                          &mdash;
+                                          <tal:filedunder  >Finnes i:</tal:filedunder>
+                                          <span tal:repeat="category categories">
+                                            <a href=""
+                                               class="link-category"
+                                               rel="tag"
+                                               tal:content="category"
+                                               tal:attributes="href string:$navigation_root_url/@@search?Subject%3Alist=${category}">
+                                              Category
+                                            </a><tal:separator condition="not: repeat/category/end">,</tal:separator>
+                                          </span>
+                                        </span>
+                                                   
                                         <span tal:define="publication_date item/EffectiveDate;
                                                           modification_date item/ModificationDate">
 
@@ -328,31 +351,15 @@
 
                                         </span>
 
-                                        <span tal:define="categories item/Subject|nothing"
-                                              tal:condition="categories">
-                                          &mdash;
-                                          <tal:filedunder i18n:translate="">filed under:</tal:filedunder>
-                                          <span tal:repeat="category categories">
-                                            <a href=""
-                                               class="link-category"
-                                               rel="tag"
-                                               tal:content="category"
-                                               tal:attributes="href string:$navigation_root_url/@@search?Subject%3Alist=${category}">
-                                              Category
-                                            </a><tal:separator condition="not: repeat/category/end">,</tal:separator>
-                                          </span>
-                                        </span>
+                                        
                                       </span>
-                                      <div tal:content="item/CroppedDescription">
-                                        Cropped description
-                                      </div>
 
-                                      <cite class="documentLocation link-location"
+                                    <cite class="documentLocation link-location"
                                             tal:define="breadcrumbs python: view.breadcrumbs(item);
                                                         is_rtl context/@@plone_portal_state/is_rtl;"
                                             tal:condition='breadcrumbs'>
-                                          <span i18n:translate="text_searchitem_location">
-                                              Located in
+                                          <span>
+                                              Finnes i:
                                           </span>
                                           <span tal:repeat="crumb breadcrumbs"
                                                 tal:attributes="dir python:is_rtl and 'rtl' or 'ltr';">
@@ -373,6 +380,11 @@
                                           </span>
 
                                       </cite>
+                                      <div tal:content="item/CroppedDescription">
+                                        Cropped description
+                                      </div>
+
+                                      
 
                                     </dd>
                               </tal:results>

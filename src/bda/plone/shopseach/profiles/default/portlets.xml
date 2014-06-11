@@ -5,8 +5,10 @@
 
  <portlet
    title="Shop search portlet"
+      name   ="bda.plone.shopsearch.ShopSearchPortlet"
       addview="bda.plone.shopsearch.ShopSearchPortlet"
-   description="A search box for bda.plone.shop"
+      description="A search box for bda.plone.shop"
+      
    />
 
 </portlets>

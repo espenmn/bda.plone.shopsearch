@@ -25,7 +25,7 @@
  
    <plone:portlet
          name="bda.plone.shopsearch.ShopSearchPortlet"
-         interface=".interfaces.IShopSearchPortlet"
+         interface =".shopsearchportlet.IShopSearchPortlet"
          assignment=".shopsearchportlet.Assignment"
          view_permission="zope2.View"
          edit_permission="cmf.ManagePortal"

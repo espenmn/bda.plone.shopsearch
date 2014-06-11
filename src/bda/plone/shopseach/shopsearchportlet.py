@@ -31,7 +31,7 @@ class IShopSearchPortlet(IPortletDataProvider, ISearchPortlet):
             required = False)
 
 
-    end = schema.Int(
+    b_size = schema.Int(
             title = _(u"How many to show"),
             description = _(u"How many to show in each batch"),
             default = 30,
@@ -41,9 +41,9 @@ class IShopSearchPortlet(IPortletDataProvider, ISearchPortlet):
 class Assignment(base.Assignment):
     implements(IShopSearchPortlet)
 
-    def __init__(self, enableLivesearch=True, end=30, showImages=True):
+    def __init__(self, enableLivesearch=True, b_size=30, showImages=True):
         self.enableLivesearch=enableLivesearch
-        self.end=end
+        self.b_size=b_size
         self.showImages=showImages
 
     @property
@@ -67,11 +67,12 @@ class Renderer(base.Renderer):
     def showImages(self):
         return self.data.showImages
 
-    def end(self):
-        return self.data.end
+    def b_size(self):
+        return self.data.b_size
 
     def search_action(self):
-        return '%s/@@shopsearch' % self.navigation_root_url
+        #return '%(url)s/@@shopsearch?b_size=%(b_size)d' % {'url':self.navigation_root_url, 'b_size':self.data.b_size}
+        return '%(url)s/@@search' % {'url':self.navigation_root_url, }
 
 
 class AddForm(base.AddForm):
