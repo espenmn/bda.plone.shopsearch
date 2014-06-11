@@ -89,10 +89,10 @@
             <div class="visualClear"><!-- --></div>
             <div id="search-results-wrapper"
                  class="cell width-full position-0"
-                 tal:define="b_start python:0; b_size python: 10; b_size python: 10;
+                 tal:define="b_start python:0; b_size python: 30;
                              b_start request/b_start | b_start;
-                             b_end request/b_size | b_size;
-                             batch python: view.results(b_start=b_start, b_size=b_size);
+                             b_size request/b_size | b_size;
+                             batch python: view.results(b_size=b_size, b_start=b_start);
                              normalizeString nocall:context/@@plone/normalizeString;">
 
                 <div id="search-results-bar">
